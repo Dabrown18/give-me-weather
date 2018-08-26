@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native'
+
+import Forecast from './Forecast';
 
 export default class WeatherProject extends Component {
 	state = {
@@ -22,6 +24,11 @@ export default class WeatherProject extends Component {
 				<Text style={styles.welcome}>
 					You input {this.state.zip}.
 				</Text>
+				<Forecast
+					main={this.state.forecast.main}
+					description={this.state.forecast.description}
+					temp={this.state.forecast.temp}
+				/>
 				<TextInput
 					style={styles.input}
 					value={this.state.zip}
@@ -37,7 +44,7 @@ export default class WeatherProject extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#4D4D4D',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -48,6 +55,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		fontSize: 20,
+		width: '100%',
 		borderWidth: 2,
 		height: 40
 	}
