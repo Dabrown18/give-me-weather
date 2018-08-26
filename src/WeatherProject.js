@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View } from 'react-native'
+import {StyleSheet, Text, View, TextInput } from 'react-native'
 
 export default class WeatherProject extends Component {
 	state = {
@@ -12,6 +12,9 @@ export default class WeatherProject extends Component {
 				<Text style={styles.welcome}>
 					You input {this.state.zip}.
 				</Text>
+				<TextInput
+					style={styles.input}
+				/>
 			</View>
 		)
 	}
@@ -33,5 +36,10 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#333333',
 		marginBottom: 5
+	},
+	input: {
+		fontSize: 20,
+		borderWidth: 2,
+		height: 40
 	}
 });
