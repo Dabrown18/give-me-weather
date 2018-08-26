@@ -8,11 +8,7 @@ export default class WeatherProject extends Component {
 
 	// Handles users input
 	_handleTextChange = (event) => {
-		this.setState(() => {
-			return {
-				zip: event
-			}
-		})
+		this.setState(() => ({ zip: event }))
 	};
 
 	render() {
