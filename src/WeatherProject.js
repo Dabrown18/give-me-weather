@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, ImageBackground } from 'react-native
 
 // Custom components
 import Forecast from './Forecast';
+import OpenWeatherMap from "./open_weather_map";
 
 // Images
 const SunFlower = require('./img/sun_flowers.png');
@@ -10,19 +11,32 @@ const SunFlower = require('./img/sun_flowers.png');
 export default class WeatherProject extends Component {
 	state = {
 		zip: '',
-		forecast :{
-			main: 'Clouds',
-			description: 'few Clouds',
-			temp: 45.7
-		}
+		forecast : null
 	};
 
 	// Handles users input
 	_handleTextChange = (event) => {
-		this.setState(() => ({ zip: event }))
+		const zip = this.setState(() => ({
+			zip: event
+		}));
+
+		OpenWeatherMap.fetchForecast(zip).then(forecast => {
+			this.setState(() => ({ forecast: forecast }))
+		});
 	};
 
 	render() {
+
+		let content = null;
+		if (this.state.forecast !== null) {
+			content = (
+				<Forecast
+					main={this.state.forecast.main}
+					description={this.state.forecast.description}
+					temp={this.state.forecast.temp}
+				/>
+			);
+		}
 		return (
 			<View style={styles.container}>
 				<ImageBackground
@@ -45,11 +59,7 @@ export default class WeatherProject extends Component {
 									onChangeText={this._handleTextChange}
 								/>
 							</View>
-							<Forecast
-								main={this.state.forecast.main}
-								description={this.state.forecast.description}
-								temp={this.state.forecast.temp}
-							/>
+							{content}
 						</View>
 					</View>
 				</ImageBackground>
