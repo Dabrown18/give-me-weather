@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, ImageBackground } from 'react-native'
 
+// Custom components
 import Forecast from './Forecast';
+
+// Images
+const SunFlower = require('./img/sun_flowers.png');
 
 export default class WeatherProject extends Component {
 	state = {
@@ -21,42 +25,82 @@ export default class WeatherProject extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>
-					You input {this.state.zip}.
-				</Text>
-				<Forecast
-					main={this.state.forecast.main}
-					description={this.state.forecast.description}
-					temp={this.state.forecast.temp}
-				/>
-				<TextInput
-					style={styles.input}
-					value={this.state.zip}
-					placeholder="Zip Code"
-					maxLength={5}
-					onChangeText={this._handleTextChange}
-				/>
+				<ImageBackground
+					source={SunFlower}
+					style={styles.backdrop}
+					imageStyle={{resizeMode: 'cover'}}
+				>
+					<View style={styles.overlay}>
+						<View style={styles.row}>
+							<Text style={styles.mainText}>
+								Current weather for
+							</Text>
+							<View style={styles.zipContainer}>
+								<TextInput
+									style={[styles.zipCode, styles.mainText]}
+									value={this.state.zip}
+									placeholder="Zip Code"
+									maxLength={5}
+									underlineColorAndroid="transparent"
+									onChangeText={this._handleTextChange}
+								/>
+							</View>
+							<Forecast
+								main={this.state.forecast.main}
+								description={this.state.forecast.description}
+								temp={this.state.forecast.temp}
+							/>
+						</View>
+					</View>
+				</ImageBackground>
 			</View>
 		)
 	}
 }
 
+const baseFontSize = 16;
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#4D4D4D',
+		alignItems: 'center'
+	},
+	backdrop: {
+		flex: 1,
+		flexDirection: 'column',
+		position: 'absolute',
+		width: '100%',
+		height: '100%'
+	},
+	overlay: {
+		paddingTop: 5,
+		backgroundColor: '#000000',
+		opacity: 0.5,
+		flexDirection: 'column',
+		alignItems: 'center',
+		flex: .40
+	},
+	row: {
+		flex: 1,
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
+		padding: 30
 	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10
+	zipContainer: {
+		flex: 1,
+		borderBottomColor: '#DDDDDD',
+		borderBottomWidth: 1,
+		marginLeft: 5,
+		marginTop: 3
 	},
-	input: {
-		fontSize: 20,
-		width: '100%',
-		borderWidth: 2,
-		height: 40
+	mainText: {
+		flex: 1,
+		fontSize: baseFontSize,
+		color: '#FFFFFF'
+	},
+	zipCode: {
+		width: 50,
+		height: baseFontSize
 	}
 });
