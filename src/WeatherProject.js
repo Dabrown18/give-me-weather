@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TextInput } from 'react-native'
+import {StyleSheet, Text, View, TextInput, Image } from 'react-native'
 
 export default class WeatherProject extends Component {
 	state = {
-		zip: ''
+		zip: '',
+		forecast :{
+			main: 'Clouds',
+			description: 'few Clouds',
+			temp: 45.7
+		}
 	};
 
 	// Handles users input
@@ -19,7 +24,6 @@ export default class WeatherProject extends Component {
 				</Text>
 				<TextInput
 					style={styles.input}
-					value={this.state.zip}
 					onChangeText={this._handleTextChange}
 				/>
 			</View>
@@ -39,23 +43,9 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		margin: 10
 	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5
-	},
 	input: {
 		fontSize: 20,
 		borderWidth: 2,
 		height: 40
-	},
-	submitButton: {
-		backgroundColor: '#7a42f4',
-		padding: 10,
-		margin: 15,
-		height: 40,
-	},
-	submitButtonText:{
-		color: 'white'
 	}
 });
