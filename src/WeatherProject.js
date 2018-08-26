@@ -24,6 +24,9 @@ export default class WeatherProject extends Component {
 				</Text>
 				<TextInput
 					style={styles.input}
+					value={this.state.zip}
+					placeholder="Zip Code"
+					maxLength={5}
 					onChangeText={this._handleTextChange}
 				/>
 			</View>
