@@ -6,6 +6,15 @@ export default class WeatherProject extends Component {
 		zip: ''
 	};
 
+	// Handles users input
+	_handleTextChange = (event) => {
+		this.setState(() => {
+			return {
+				zip: event
+			}
+		})
+	};
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -14,6 +23,8 @@ export default class WeatherProject extends Component {
 				</Text>
 				<TextInput
 					style={styles.input}
+					value={this.state.zip}
+					onChangeText={this._handleTextChange}
 				/>
 			</View>
 		)
@@ -41,5 +52,14 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		borderWidth: 2,
 		height: 40
+	},
+	submitButton: {
+		backgroundColor: '#7a42f4',
+		padding: 10,
+		margin: 15,
+		height: 40,
+	},
+	submitButtonText:{
+		color: 'white'
 	}
 });
